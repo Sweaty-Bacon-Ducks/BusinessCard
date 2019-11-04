@@ -6,7 +6,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "elm make SBDPage/Main.elm --output SBDPage/app.js",
+            "command": "elm make Source/Main.elm --output SBDPage/app.js",
             "problemMatcher": []
         }
     ]

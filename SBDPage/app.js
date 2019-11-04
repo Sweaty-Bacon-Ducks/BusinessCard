@@ -6721,6 +6721,7 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$container = F2(
 				attributes),
 			children);
 	});
+var $elm$html$Html$a = _VirtualDom_node('a');
 var $rundis$elm_bootstrap$Bootstrap$Card$Internal$Aligned = function (a) {
 	return {$: 'Aligned', a: a};
 };
@@ -7115,38 +7116,35 @@ var $rundis$elm_bootstrap$Bootstrap$Card$view = function (_v0) {
 };
 var $author$project$Main$cardFactory = F2(
 	function (title, iconPath) {
-		return _List_fromArray(
-			[
-				$rundis$elm_bootstrap$Bootstrap$Card$view(
-				A3(
-					$rundis$elm_bootstrap$Bootstrap$Card$block,
-					_List_Nil,
-					_List_fromArray(
-						[
-							A2(
-							$rundis$elm_bootstrap$Bootstrap$Card$Block$titleH3,
-							_List_Nil,
-							_List_fromArray(
-								[
-									$elm$html$Html$text(title)
-								])),
-							$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
-							A2(
-								$elm$html$Html$img,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$src(iconPath),
-										A2($elm$html$Html$Attributes$style, 'height', 'auto'),
-										A2($elm$html$Html$Attributes$style, 'width', '50%')
-									]),
-								_List_Nil))
-						]),
-					$rundis$elm_bootstrap$Bootstrap$Card$config(
+		return $rundis$elm_bootstrap$Bootstrap$Card$view(
+			A3(
+				$rundis$elm_bootstrap$Bootstrap$Card$block,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						$rundis$elm_bootstrap$Bootstrap$Card$Block$titleH3,
+						_List_Nil,
 						_List_fromArray(
 							[
-								$rundis$elm_bootstrap$Bootstrap$Card$align($rundis$elm_bootstrap$Bootstrap$Text$alignXsCenter)
-							]))))
-			]);
+								$elm$html$Html$text(title)
+							])),
+						$rundis$elm_bootstrap$Bootstrap$Card$Block$custom(
+						A2(
+							$elm$html$Html$img,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$src(iconPath),
+									A2($elm$html$Html$Attributes$style, 'height', 'auto'),
+									A2($elm$html$Html$Attributes$style, 'width', '50%')
+								]),
+							_List_Nil))
+					]),
+				$rundis$elm_bootstrap$Bootstrap$Card$config(
+					_List_fromArray(
+						[
+							$rundis$elm_bootstrap$Bootstrap$Card$align($rundis$elm_bootstrap$Bootstrap$Text$alignXsCenter)
+						]))));
 	});
 var $rundis$elm_bootstrap$Bootstrap$Grid$Column = function (a) {
 	return {$: 'Column', a: a};
@@ -7156,6 +7154,12 @@ var $rundis$elm_bootstrap$Bootstrap$Grid$col = F2(
 		return $rundis$elm_bootstrap$Bootstrap$Grid$Column(
 			{children: children, options: options});
 	});
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col = {$: 'Col'};
 var $rundis$elm_bootstrap$Bootstrap$Grid$Internal$Width = F2(
 	function (screenSize, columnCount) {
@@ -7932,15 +7936,51 @@ var $author$project$Main$homePage = _List_fromArray(
 				A2(
 				$rundis$elm_bootstrap$Bootstrap$Grid$col,
 				_List_Nil,
-				A2($author$project$Main$cardFactory, 'AboutUs', 'static/about-us-icon.png')),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$a,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$href('#about-us')
+							]),
+						_List_fromArray(
+							[
+								A2($author$project$Main$cardFactory, 'AboutUs', 'static/about-us-icon.png')
+							]))
+					])),
 				A2(
 				$rundis$elm_bootstrap$Bootstrap$Grid$col,
 				_List_Nil,
-				A2($author$project$Main$cardFactory, 'Projects', 'static/projects-icon.png')),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$a,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$href('#projects')
+							]),
+						_List_fromArray(
+							[
+								A2($author$project$Main$cardFactory, 'Projects', 'static/projects-icon.png')
+							]))
+					])),
 				A2(
 				$rundis$elm_bootstrap$Bootstrap$Grid$col,
 				_List_Nil,
-				A2($author$project$Main$cardFactory, 'Contact', 'static/contact-icon.png'))
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$a,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$href('#contact')
+							]),
+						_List_fromArray(
+							[
+								A2($author$project$Main$cardFactory, 'Contact', 'static/contact-icon.png')
+							]))
+					]))
 			]))
 	]);
 var $author$project$Main$notFoundPage = _List_fromArray(
@@ -7991,7 +8031,6 @@ var $author$project$Main$mainContentView = function (model) {
 var $rundis$elm_bootstrap$Bootstrap$Navbar$Brand = function (a) {
 	return {$: 'Brand', a: a};
 };
-var $elm$html$Html$a = _VirtualDom_node('a');
 var $rundis$elm_bootstrap$Bootstrap$Navbar$Config = function (a) {
 	return {$: 'Config', a: a};
 };
@@ -8080,12 +8119,6 @@ var $rundis$elm_bootstrap$Bootstrap$Navbar$dark = A2(
 	$rundis$elm_bootstrap$Bootstrap$Navbar$scheme,
 	$rundis$elm_bootstrap$Bootstrap$Navbar$Dark,
 	$rundis$elm_bootstrap$Bootstrap$Navbar$Roled($rundis$elm_bootstrap$Bootstrap$Internal$Role$Dark));
-var $elm$html$Html$Attributes$href = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'href',
-		_VirtualDom_noJavaScriptUri(url));
-};
 var $rundis$elm_bootstrap$Bootstrap$Navbar$items = F2(
 	function (items_, config_) {
 		return A2(
@@ -8887,7 +8920,7 @@ var $author$project$Main$view = function (model) {
 						$author$project$Main$footerView
 					]))
 			]),
-		title: 'Sweaty Bacon Ducks'
+		title: 'Home'
 	};
 };
 var $author$project$Main$main = $elm$browser$Browser$application(

@@ -8,9 +8,11 @@ import Bootstrap.Navbar as Navbar
 import Bootstrap.Text as Text
 import Browser exposing (UrlRequest)
 import Browser.Navigation as Navigation
+import Css as Css
 import Html exposing (..)
 import Html.Attributes as Attrs
 import Html.Events exposing (onClick)
+import Html.Styled.Attributes as StyledAttrs
 import Url exposing (Url)
 import Url.Parser as UrlParser exposing ((</>), Parser, s, top)
 
@@ -113,7 +115,7 @@ routeParser =
 
 view : Model -> Browser.Document Msg
 view model =
-    { title = "Sweaty Bacon Ducks"
+    { title = "Home"
     , body =
         [ Html.div
             [ Attrs.style "font-family" "VT323"
@@ -161,18 +163,18 @@ homePage : List (Html Msg)
 homePage =
     [ Grid.row []
         [ Grid.col []
-            (cardFactory "AboutUs" "static/about-us-icon.png")
+            [ Html.a [ Attrs.href "#about-us" ] [ cardFactory "AboutUs" "static/about-us-icon.png" ] ]
         , Grid.col []
-            (cardFactory "Projects" "static/projects-icon.png")
+            [ Html.a [ Attrs.href "#projects" ] [ cardFactory "Projects" "static/projects-icon.png" ] ]
         , Grid.col []
-            (cardFactory "Contact" "static/contact-icon.png")
+            [ Html.a [ Attrs.href "#contact" ] [ cardFactory "Contact" "static/contact-icon.png" ] ]
         ]
     ]
 
 
-cardFactory : String -> String -> List (Html msg)
+cardFactory : String -> String -> Html msg
 cardFactory title iconPath =
-    [ Card.config [ Card.align Text.alignXsCenter ]
+    Card.config [ Card.align Text.alignXsCenter ]
         |> Card.block []
             [ CardBlock.titleH3 [] [ text title ]
             , CardBlock.custom
@@ -185,7 +187,6 @@ cardFactory title iconPath =
                 )
             ]
         |> Card.view
-    ]
 
 
 aboutUsCardHeaderContent : List (Html msg)
