@@ -14,6 +14,6 @@ jobs:
     - uses: jorelali/setup-elm@v1
       with:
         elm-version: 0.19.1
-        
-    - run: chmod +x build.sh; ./build.sh
+    - run: git clone https://github.com/Sweaty-Bacon-Ducks/BusinessCard
+    - run: cd BusinessCard; chmod +x build.sh; ./build.sh
     - run: git subtree push --prefix SBDPAge origin gh-pages
