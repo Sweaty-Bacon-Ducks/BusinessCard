@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  push:
+    branches: 
+      - master
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: jorelali/setup-elm@v1
+      with:
+        elm-version: 0.19.1
+        
+    - run: chmod +x build.sh; ./build.sh
+    - run: git subtree push --prefix SBDPAge origin gh-pages
