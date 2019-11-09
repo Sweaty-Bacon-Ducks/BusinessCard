@@ -1,14 +1,26 @@
 name: gh-pages-deploy
 
-on:
-  push:
-    branches: master
+on: push
 
 jobs:
-  build:
-
+  publish:
     runs-on: ubuntu-latest
-
     steps:
-    - name: GitHub Pages Deploy
-      uses: maxheld83/ghpages@v0.1.2
+      -
+        name: Checkout
+        uses: actions/checkout@v1
+      -
+        name: Build
+        uses: jorelali/setup-elm@v1
+        with:
+            elm-version: 0.19.1
+            run: elm make Source/Main.elm --output SBDPage/app.js
+      -
+        name: Deploy
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v1
+        with:
+          target_branch: gh-pages
+          build_dir: SBDPage
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
