@@ -1,5 +1,8 @@
 module Main exposing (..)
 
+-- import Html
+-- import Html.Attributes as Attrs
+import Bootstrap.CDN as CDN
 import Bootstrap.Card as Card
 import Bootstrap.Card.Block as CardBlock
 import Bootstrap.Grid as Grid
@@ -8,11 +11,10 @@ import Bootstrap.Navbar as Navbar
 import Bootstrap.Text as Text
 import Browser exposing (UrlRequest)
 import Browser.Navigation as Navigation
-import Css as Css
-import Html exposing (..)
+import Html
 import Html.Attributes as Attrs
 import Html.Events exposing (onClick)
-import Html.Styled.Attributes as StyledAttrs
+import List
 import Url exposing (Url)
 import Url.Parser as UrlParser exposing ((</>), Parser, s, top)
 
@@ -44,7 +46,12 @@ init flags url key =
             Navbar.initialState NavMsg
 
         ( model, urlCmd ) =
-            urlUpdate url { navKey = key, navState = navState, page = Home, modalVisibility = Modal.hidden }
+            urlUpdate url
+                { navKey = key
+                , navState = navState
+                , page = Home
+                , modalVisibility = Modal.hidden
+                }
     in
     ( model, Cmd.batch [ urlCmd, navCmd ] )
 
@@ -128,18 +135,18 @@ view model =
     }
 
 
-menuView : Model -> Html Msg
+menuView : Model -> Html.Html Msg
 menuView model =
     Navbar.config NavMsg
         |> Navbar.dark
         |> Navbar.brand
             [ Attrs.href "#", Attrs.style "font-size" "2rem" ]
-            [ text "Sweaty Bacon Ducks" ]
+            [ Html.text "Sweaty Bacon Ducks" ]
         |> Navbar.items []
         |> Navbar.view model.navState
 
 
-mainContentView : Model -> Html Msg
+mainContentView : Model -> Html.Html Msg
 mainContentView model =
     Grid.container [ Attrs.style "padding-top" "40vh" ] <|
         case model.page of
@@ -159,39 +166,46 @@ mainContentView model =
                 notFoundPage
 
 
-homePage : List (Html Msg)
+homePage : List (Html.Html Msg)
 homePage =
     [ Grid.row []
         [ Grid.col []
-            [ Html.a [ Attrs.href "#about-us" ] [ cardFactory "AboutUs" "static/about-us-icon.png" ] ]
+            [ cardFactory "#about-us" "AboutUs" "static/about-us-icon.png" ]
         , Grid.col []
-            [ Html.a [ Attrs.href "#projects" ] [ cardFactory "Projects" "static/projects-icon.png" ] ]
+            [ cardFactory "#projects" "Projects" "static/projects-icon.png" ]
         , Grid.col []
-            [ Html.a [ Attrs.href "#contact" ] [ cardFactory "Contact" "static/contact-icon.png" ] ]
+            [ cardFactory "#contact" "Contact" "static/contact-icon.png" ]
         ]
     ]
 
 
-cardFactory : String -> String -> Html msg
-cardFactory title iconPath =
-    Card.config [ Card.align Text.alignXsCenter ]
-        |> Card.block []
-            [ CardBlock.titleH3 [] [ text title ]
-            , CardBlock.custom
-                (img
-                    [ Attrs.src iconPath
-                    , Attrs.style "height" "auto"
-                    , Attrs.style "width" "50%"
+cardFactory : String -> String -> String -> Html.Html msg
+cardFactory href title iconPath =
+    let
+        anchorChildren =
+            [ Card.config [ Card.align Text.alignXsCenter, Card.attrs [ Attrs.class "shadow-sm", Attrs.class "mb-5" ] ]
+                |> Card.block []
+                    [ CardBlock.titleH3 [] [ title |> Html.text ]
+                    , CardBlock.custom
+                        (Html.img
+                            [ Attrs.src iconPath
+                            , Attrs.style "height" "auto"
+                            , Attrs.style "width" "50%"
+                            ]
+                            []
+                        )
                     ]
-                    []
-                )
+                |> Card.view
             ]
-        |> Card.view
+    in
+    Html.a
+        [ Attrs.href href ]
+        anchorChildren
 
 
-aboutUsCardHeaderContent : List (Html msg)
+aboutUsCardHeaderContent : List (Html.Html msg)
 aboutUsCardHeaderContent =
-    [ img
+    [ Html.img
         [ Attrs.src "static/user.png"
         , Attrs.style "height" "auto"
         , Attrs.style "width" "40%"
@@ -202,9 +216,9 @@ aboutUsCardHeaderContent =
 
 aboutUsCardBlockContent : List (CardBlock.Item msg)
 aboutUsCardBlockContent =
-    [ CardBlock.titleH3 [] [ text "AboutUs" ]
+    [ CardBlock.titleH3 [] [ Html.text "AboutUs" ]
     , CardBlock.custom
-        (img
+        (Html.img
             [ Attrs.src "static/user.png"
             , Attrs.style "height" "auto"
             , Attrs.style "width" "50%"
@@ -216,37 +230,37 @@ aboutUsCardBlockContent =
 
 projectsCardContent : List (CardBlock.Item msg)
 projectsCardContent =
-    [ CardBlock.titleH3 [] [ text "Projects" ]
+    [ CardBlock.titleH3 [] [ Html.text "Projects" ]
     ]
 
 
 teamMembersContent : List (CardBlock.Item msg)
 teamMembersContent =
-    [ CardBlock.titleH3 [] [ text "Our Team" ]
+    [ CardBlock.titleH3 [] [ Html.text "Our Team" ]
     ]
 
 
-aboutUsPage : Model -> List (Html Msg)
+aboutUsPage : Model -> List (Html.Html Msg)
 aboutUsPage model =
-    [ Html.h1 [] [ text "AboutUs" ] ]
+    [ Html.h1 [] [ Html.text "AboutUs" ] ]
 
 
-projectsPage : Model -> List (Html Msg)
+projectsPage : Model -> List (Html.Html Msg)
 projectsPage model =
-    [ Html.h1 [] [ text "Projects" ] ]
+    [ Html.h1 [] [ Html.text "Projects" ] ]
 
 
-contactPage : Model -> List (Html Msg)
+contactPage : Model -> List (Html.Html Msg)
 contactPage model =
-    [ Html.h1 [] [ text "TeamMembers" ] ]
+    [ Html.h1 [] [ Html.text "TeamMembers" ] ]
 
 
-notFoundPage : List (Html Msg)
+notFoundPage : List (Html.Html Msg)
 notFoundPage =
-    [ Html.h1 [] [ text "TeamMembers" ] ]
+    [ Html.h1 [] [ Html.text "TeamMembers" ] ]
 
 
-footerView : Html Msg
+footerView : Html.Html Msg
 footerView =
     Html.footer
         [ Attrs.class "container-fluid"
@@ -254,7 +268,7 @@ footerView =
         , Attrs.style "color" "white"
         , Attrs.style "background-color" "gray"
         ]
-        [ Html.h5 [] [ text "All rights reserved (2019)" ]
+        [ Html.h5 [] [ Html.text "All rights reserved (2019)" ]
         ]
 
 
