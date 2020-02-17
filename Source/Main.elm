@@ -103,7 +103,7 @@ view model =
                 , div [ classList [ ( "col-sm", True ), ( "emph-text", True ) ] ]
                     [ img
                         [ class "organization-logo"
-                        , src "static/warrior-duck.png"
+                        , src "static/sbd-icon.png"
                         , alt "Organization logo"
                         ]
                         []
