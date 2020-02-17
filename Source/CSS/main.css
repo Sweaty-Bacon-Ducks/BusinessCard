@@ -49,8 +49,23 @@ h1, h2, h3, span, a {
     margin-top: 5vh;
 }
 
+.footer {
+    background-color: gray;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    
+}
 
-
+.github-icon {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 3vw;
+    /* display: flex;
+    align-items: center; */
+}
 
 .organization-logo {
     width: 15vw;

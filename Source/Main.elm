@@ -147,7 +147,18 @@ view model =
                         []
                     ]
                 ]
-            , div [ classList [ ( "row", True ) ] ] []
+            , div [ classList [ ( "row", True ), ( "justify-content-center", True ) ] ]
+                [ div [ classList [ ( "col-sm", True ), ( "footer", True ) ] ]
+                    [ a [ href "https://github.com/Sweaty-Bacon-Ducks/" ]
+                        [ img
+                            [ class "github-icon"
+                            , src "static/github-icon.png"
+                            , alt "Github Icon"
+                            ]
+                            []
+                        ]
+                    ]
+                ]
             ]
         ]
     }
