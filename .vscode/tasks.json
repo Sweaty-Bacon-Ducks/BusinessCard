@@ -6,7 +6,13 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "elm make Source/Main.elm --output SBDPage/app.js",
+            "command": "source tasks/build.sh",
+            "problemMatcher": []
+        },
+        {
+            "label": "clear_build",
+            "type": "shell",
+            "command": "source tasks/clear_build.sh",
             "problemMatcher": []
         }
     ]

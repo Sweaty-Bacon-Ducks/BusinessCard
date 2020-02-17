@@ -1,0 +1,4 @@
+SBDPage/* linguist-vendored
+*.elm linguist-vendored=false
+*.html linguist-detectable=true
+*.css linguist-detectable=true
